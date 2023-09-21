@@ -1,0 +1,18 @@
+server:
+  port: 6815
+
+common:
+  user:
+    username: pycro
+    password: ${crypto.passwd}
+    address: Suzhou
+    email: pycro6815@163.com
+  hostname: centos
+  defaultFtp:
+    host: 172.16.0.1
+    ip: 23306
+    user: root
+    password: BDsec2022,,
+
+crypto:
+  passwd: 12345678
