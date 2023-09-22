@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -135,6 +137,69 @@ class MavenTestPlaceApplicationTests {
             System.out.println(0xff & 62);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void testName2Number() {
+        String name = "123";
+
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < name.length(); i++) {
+            char ch = name.charAt(i);
+            int num = (ch - 'a' + 1) % 10;
+            numbers.add(num);
+        }
+        numbers.forEach(System.out::print);
+    }
+
+    @Test
+    public void testCalcFileMD5() {
+        // 38731d19f464f39e6443059be9b17bb7
+        // c2bad345df31ad36f78b37ef8516fa7b
+        // c2bad345df31ad36f78b37ef8516fa7b
+        String filePath = "C:\\Users\\20237\\Desktop\\sdd_test004.sql";
+        try (
+                FileInputStream fis = new FileInputStream(filePath)
+        ) {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            DigestInputStream dis = new DigestInputStream(fis, md);
+            // 读取文件内容，直到读完所有字节
+            while (dis.read() != -1) {
+            }
+
+            // 获取计算得到的 MD5 值
+            byte[] digest = md.digest();
+
+            // 将字节数组转换为十六进制字符串
+            StringBuilder builder = new StringBuilder();
+            for (byte b : digest) {
+                builder.append(String.format("%02x", b));
+            }
+
+            System.out.println("MD5值: " + builder);
+            dis.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testStringFormat() {
+        String format = String.format("%02x", 0xff & 1);
+        System.out.println(format);
+    }
+
+    @Test
+    public void testGetCodeFromChar() {
+        String str = "我";
+        byte[] bytes = str.getBytes(StandardCharsets.US_ASCII);
+        for (byte b : bytes) {
+            // String binaryString = Integer.toHexString(aByte).toUpperCase();
+            // String substring = binaryString.substring(binaryString.length() - 2);
+            // System.out.printf("%s", substring);
+            System.out.printf("%02X", b);
         }
     }
 }
