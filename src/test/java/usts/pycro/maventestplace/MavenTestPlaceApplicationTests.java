@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
@@ -192,15 +194,38 @@ class MavenTestPlaceApplicationTests {
     }
 
     @Test
-    public void testGetCodeFromChar() {
-        String str = "我";
-        byte[] bytes = str.getBytes(StandardCharsets.US_ASCII);
-        for (byte b : bytes) {
-            // String binaryString = Integer.toHexString(aByte).toUpperCase();
-            // String substring = binaryString.substring(binaryString.length() - 2);
-            // System.out.printf("%s", substring);
+    public void testGetCodeFromChar() throws UnsupportedEncodingException {
+        String str = "abcdefg";
+        byte[] utf8Bytes = str.getBytes(StandardCharsets.UTF_8);
+        byte[] gbk8Bytes = str.getBytes("GBK");
+        String s = new String(str.getBytes(StandardCharsets.UTF_8), Charset.forName("gb2312"));
+        System.out.println(s);
+        System.out.print("0x");
+        for (byte b : utf8Bytes) {
             System.out.printf("%02X", b);
         }
+        System.out.println();
+        System.out.print("0x");
+        for (byte b : gbk8Bytes) {
+            System.out.printf("%02X", b);
+        }
+        System.out.println();
+    }
+
+    @Test
+    public void testDBI() {
+        System.out.println(new ArrayList<Student>() {
+            {
+                new Student();
+                new Student();
+                new Student();
+            }
+        }.size());
+    }
+
+    @Test
+    public void testNull() {
+        System.out.println(((Double) null).MIN_VALUE);
     }
 }
 
