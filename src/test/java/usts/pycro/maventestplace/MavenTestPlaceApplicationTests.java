@@ -12,9 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @SpringBootTest
 class MavenTestPlaceApplicationTests {
@@ -227,6 +225,20 @@ class MavenTestPlaceApplicationTests {
     public void testNull() {
         System.out.println(((Double) null).MIN_VALUE);
     }
+
+    @Test
+    public void test() {
+        Scanner in = new Scanner(System.in);
+        // 注意 hasNext 和 hasNextLine 的区别
+        while (in.hasNextLine()) { // 注意 while 处理多个 case
+            int count = in.nextInt();
+            int sum = 0;
+            for (int i = 0; i < count; ++i) {
+                sum += in.nextInt();
+            }
+            System.out.println(sum);
+        }
+    }
 }
 
 class Student {
@@ -283,4 +295,20 @@ class Teacher {
     public String name;
     public String gender;
     public String email;
+
+    public static void main(String[] args) {
+        // Scanner in = new Scanner(System.in);
+        // while (in.hasNextInt()) {
+        //     int sum = 0;
+        //
+        //         sum += in.nextInt();
+        //
+        //     System.out.println(sum);
+        // }
+        String[] arr = new String[]{"bb","c","a","dd","e"};
+        Arrays.sort(arr);
+        for (String s : arr) {
+            System.out.println(s+" ");
+        }
+    }
 }
