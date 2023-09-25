@@ -36,6 +36,5 @@ public class SingleTableTest {
     public void testSelect() {
         long count = mapper.selectCountByQuery(QueryWrapper.create());
         System.out.println(count);
-        ;
     }
 }
