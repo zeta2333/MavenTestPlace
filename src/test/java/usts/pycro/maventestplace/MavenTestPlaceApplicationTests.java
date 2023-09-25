@@ -305,10 +305,32 @@ class Teacher {
         //
         //     System.out.println(sum);
         // }
-        String[] arr = new String[]{"bb","c","a","dd","e"};
-        Arrays.sort(arr);
-        for (String s : arr) {
-            System.out.println(s+" ");
+        int calculate = calculate("111 + 11");
+        System.out.println(calculate);
+    }
+
+    public static int calculate(String s) {
+        // write code here
+        int sum = 0;
+        String curNum = "";
+        int i = 0;
+        while (i < s.length()) {
+            char ch = s.charAt(i);
+            if (ch - '1' != 0) {
+                i++;
+                continue;
+            } else {
+                while (i < s.length() && s.charAt(i) == '1') {
+                    curNum += ch;
+                    if (i < s.length()) {
+                        i++;
+                    } else break;
+                }
+                sum += Integer.parseInt(curNum);
+                curNum = "";
+            }
+            i++;
         }
+        return sum;
     }
 }

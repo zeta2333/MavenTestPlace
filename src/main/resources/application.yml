@@ -1,6 +1,12 @@
 server:
   port: 6815
 
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/index_demo
+    username: ${crypto.user}
+    password: ${crypto.passwd}
+
 common:
   user:
     username: pycro
@@ -15,4 +21,5 @@ common:
     password: BDsec2022,,
 
 crypto:
+  user: root
   passwd: 12345678
