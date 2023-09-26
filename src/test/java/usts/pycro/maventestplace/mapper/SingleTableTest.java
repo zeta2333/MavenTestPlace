@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import usts.pycro.maventestplace.model.SingleTable;
 
+import java.util.List;
+
 /**
  * @author Pycro
  * @version 1.0
@@ -34,7 +36,9 @@ public class SingleTableTest {
 
     @Test
     public void testSelect() {
-        long count = mapper.selectCountByQuery(QueryWrapper.create());
-        System.out.println(count);
+        QueryWrapper wrapper = QueryWrapper.create()
+                .limit(20);
+        List<SingleTable> singleTables = mapper.selectListByQuery(wrapper);
+        singleTables.forEach(System.out::println);
     }
 }

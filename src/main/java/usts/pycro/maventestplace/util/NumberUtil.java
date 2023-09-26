@@ -4,41 +4,45 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 /**
  * @author Pycro
  * @version 1.0
  * 2023-09-22 20:22
+ * 对于任意输入的字符串，输出一个确定的6位数
  */
 @Component
 public class NumberUtil {
 
     public static void main(String[] args) {
-        String name = "马奇康";
-        String pycro = "PYCRO";
-        StringBuilder code = new StringBuilder();
-        for (int i = 0; i < pycro.length(); i++) {
-            code.append((pycro.charAt(i)) % 10);
-        }
-        int sum = 0;
-        for (int i = 0; i < code.length(); i++) {
-            sum += code.charAt(i) * (i + 1);
-        }
-        code.append(sum % 10);
-        System.out.println(code);
-
+        System.out.print("请输入关键字：");
+        String s = hashNum(new Scanner(System.in).next(), 6);
+        System.out.println(s);
     }
 
 
-    public static String hashNum(String input, int length) {
+    public static String hashNum(String input, int numLen) {
         byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
-        BigInteger sum = new BigInteger("0");
+        BigInteger factor = new BigInteger("1");
         for (byte curByte : inputBytes) {
             BigInteger incr = pow(new BigInteger(Byte.toString(curByte)), (int) curByte);
-            sum = sum.add(incr);
+            factor = factor.multiply(incr);
         }
-        String sumString = sum.toString();
-        return sumString.substring(sumString.length() - length);
+        System.out.println("乘积长度为：" + factor.toString().length());
+
+        String divString = factor.divide(BigInteger.valueOf(factor.hashCode())).toString();
+        // average select digit
+        int strLen = divString.length();
+        int blockLen = strLen / numLen;
+        StringBuilder resNum = new StringBuilder();
+        for (int i = 0; i < strLen; i += blockLen) {
+            if (resNum.length() >= numLen) {
+                break;
+            }
+            resNum.append(divString.charAt(strLen - 1 - i));
+        }
+        return resNum.toString();
     }
 
     public static BigInteger pow(BigInteger factor, Integer exp) {
