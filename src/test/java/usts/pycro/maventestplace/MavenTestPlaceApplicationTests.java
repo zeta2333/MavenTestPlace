@@ -227,7 +227,7 @@ class MavenTestPlaceApplicationTests {
     }
 
     @Test
-    public void test() {
+    public void testInput() {
         Scanner in = new Scanner(System.in);
         // 注意 hasNext 和 hasNextLine 的区别
         while (in.hasNextLine()) { // 注意 while 处理多个 case
@@ -238,6 +238,25 @@ class MavenTestPlaceApplicationTests {
             }
             System.out.println(sum);
         }
+    }
+
+    @Test
+    public void testChar() throws UnsupportedEncodingException {
+        byte[] bytes = "䖿".getBytes();
+        for (byte b : bytes) {
+            System.out.printf("0x%2X", b);
+        }
+        System.out.println("\u45BF");
+    }
+
+    @Test
+    public void testCompareChar() {
+        String sentence = "Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.";
+        byte[] encode = Base64.getEncoder().encode(sentence.getBytes());
+        String s = new String(encode);
+        System.out.println(s);
+        byte[] decode = Base64.getDecoder().decode(s);
+        System.out.println(new String(decode));
     }
 }
 

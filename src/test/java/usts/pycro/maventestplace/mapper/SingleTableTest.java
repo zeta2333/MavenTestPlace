@@ -1,6 +1,5 @@
 package usts.pycro.maventestplace.mapper;
 
-import cn.hutool.core.util.RandomUtil;
 import com.mybatisflex.core.query.QueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +20,17 @@ public class SingleTableTest {
 
     @Test
     public void testInsert() {
-        for (int i = 0; i < 10000; i++) {
-            SingleTable singleTable = new SingleTable();
-            singleTable.setKey1(RandomUtil.randomString(5));
-            singleTable.setKey2(i + 23306);
-            singleTable.setKey3(RandomUtil.randomString(6));
-            singleTable.setKeyPart1(RandomUtil.randomString(4));
-            singleTable.setKeyPart2(RandomUtil.randomString(5));
-            singleTable.setKeyPart3(RandomUtil.randomString(6));
-            singleTable.setCommonFiled("常规字段");
-            mapper.insertSelective(singleTable);
-        }
+        // for (int i = 0; i < 10000; i++) {
+        //     SingleTable singleTable = new SingleTable();
+        //     singleTable.setKey1(RandomUtil.randomString(5));
+        //     singleTable.setKey2(i + 23306);
+        //     singleTable.setKey3(RandomUtil.randomString(6));
+        //     singleTable.setKeyPart1(RandomUtil.randomString(4));
+        //     singleTable.setKeyPart2(RandomUtil.randomString(5));
+        //     singleTable.setKeyPart3(RandomUtil.randomString(6));
+        //     singleTable.setCommonFiled("常规字段");
+        //     mapper.insertSelective(singleTable);
+        // }
     }
 
     @Test
