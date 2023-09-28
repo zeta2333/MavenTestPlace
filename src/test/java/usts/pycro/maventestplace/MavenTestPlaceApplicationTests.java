@@ -258,6 +258,11 @@ class MavenTestPlaceApplicationTests {
         byte[] decode = Base64.getDecoder().decode(s);
         System.out.println(new String(decode));
     }
+
+    @Test
+    public void testOps() {
+        System.out.println(2345 * 567);
+    }
 }
 
 class Student {
