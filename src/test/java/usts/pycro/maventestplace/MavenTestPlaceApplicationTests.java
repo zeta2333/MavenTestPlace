@@ -261,7 +261,12 @@ class MavenTestPlaceApplicationTests {
 
     @Test
     public void testOps() {
-        System.out.println(2345 * 567);
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        long id = 3L;
+        System.out.println();
     }
 }
 
