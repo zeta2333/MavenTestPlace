@@ -2,6 +2,8 @@ package usts.pycro.maventestplace.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author Pycro
  * @version 1.0
@@ -16,5 +18,6 @@ public class SensitiveRecognizeRule extends BaseEntity {
     private String sensitiveDataContent;
     private Integer sensitiveDataRequirement;
     private Integer dataTypeCount;
+    private List<Integer> intMembers;
 
 }
