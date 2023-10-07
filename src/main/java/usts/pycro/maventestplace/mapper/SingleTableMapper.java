@@ -2,7 +2,7 @@ package usts.pycro.maventestplace.mapper;
 
 import com.mybatisflex.core.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import usts.pycro.maventestplace.model.SingleTable;
+import usts.pycro.maventestplace.entity.SingleTable;
 
 /**
  * @author Pycro

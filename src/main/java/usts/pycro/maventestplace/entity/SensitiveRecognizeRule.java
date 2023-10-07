@@ -1,4 +1,4 @@
-package usts.pycro.maventestplace.model;
+package usts.pycro.maventestplace.entity;
 
 import lombok.Data;
 

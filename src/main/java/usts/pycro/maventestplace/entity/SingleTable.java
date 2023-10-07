@@ -1,4 +1,4 @@
-package usts.pycro.maventestplace.model;
+package usts.pycro.maventestplace.entity;
 
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Id;
