@@ -37,11 +37,11 @@ public class SysUserTest {
     @Test
     public void testSelect() {
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(SysUser::getAge, 18);
+        wrapper.ge(SysUser::getAge, 18);
         long start = System.currentTimeMillis();
         List<SysUser> list = service.list(wrapper);
         long end = System.currentTimeMillis();
         System.out.printf("耗时：%dms%n", end - start);
-        list.forEach(System.out::println);
+        // list.forEach(System.out::println);
     }
 }
