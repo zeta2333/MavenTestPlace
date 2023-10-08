@@ -1,11 +1,11 @@
 package usts.pycro.maventestplace.mapper;
 
-import cn.hutool.core.util.RandomUtil;
 import com.mybatisflex.core.query.QueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import usts.pycro.maventestplace.entity.SingleTable;
+import usts.pycro.maventestplace.service.SingleTableService;
 
 import java.util.List;
 
@@ -17,28 +17,31 @@ import java.util.List;
 @SpringBootTest
 public class SingleTableTest {
     @Autowired
-    private SingleTableMapper mapper;
+    private SingleTableService service;
 
     @Test
     public void testInsert() {
-        for (int i = 0; i < 10000; i++) {
-            SingleTable singleTable = new SingleTable();
-            singleTable.setKey1(RandomUtil.randomString(5));
-            singleTable.setKey2(i + 23306);
-            singleTable.setKey3(RandomUtil.randomString(6));
-            singleTable.setKeyPart1(RandomUtil.randomString(4));
-            singleTable.setKeyPart2(RandomUtil.randomString(5));
-            singleTable.setKeyPart3(RandomUtil.randomString(6));
-            singleTable.setCommonFiled("常规字段" + (i + 1));
-            mapper.insertSelective(singleTable);
-        }
+        // for (int i = 0; i < 10000; i++) {
+        //     SingleTable singleTable = new SingleTable();
+        //     singleTable.setKey1(RandomUtil.randomString(1));
+        //     singleTable.setKey2(i + 12345);
+        //     singleTable.setKey3(RandomUtil.randomString(3));
+        //     singleTable.setKeyPart1(RandomUtil.randomString(7));
+        //     singleTable.setKeyPart2(RandomUtil.randomString(8));
+        //     singleTable.setKeyPart3(RandomUtil.randomString(9));
+        //     singleTable.setCommonFiled("常规字段" + (i + 1));
+        //     service.save(singleTable);
+        // }
+        SingleTable singleTable = new SingleTable();
+        singleTable.setKey1("1");
+        service.save(singleTable);
     }
 
     @Test
     public void testSelect() {
         QueryWrapper wrapper = QueryWrapper.create()
                 .limit(20);
-        List<SingleTable> singleTables = mapper.selectListByQuery(wrapper);
+        List<SingleTable> singleTables = service.list(wrapper);
         singleTables.forEach(System.out::println);
     }
 }

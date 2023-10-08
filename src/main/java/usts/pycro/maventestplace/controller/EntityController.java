@@ -32,15 +32,13 @@ public class EntityController {
             setSensitiveDataContent("[1,2,3]");
             setSensitiveDataRequirement(2);
             setDataTypeCount(3);
-            setIntMembers(new ArrayList<Integer>() {
-                {
-                    add(1);
-                    add(2);
-                    add(3);
-                    add(4);
-                    add(5);
-                }
-            });
+            setIntMembers(new ArrayList<Integer>() {{
+                add(1);
+                add(2);
+                add(3);
+                add(4);
+                add(5);
+            }});
         }};
         SensitiveRecognizeRuleVo sensitiveRecognizeRuleVo = new SensitiveRecognizeRuleVo();
         BeanUtils.copyProperties(sensitiveRecognizeRule, sensitiveRecognizeRuleVo);
