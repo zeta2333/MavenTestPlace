@@ -11,8 +11,7 @@ spring:
     password: ${crypto.passwd}
 mybatis-flex:
   configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
-
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,6 +1,6 @@
 package usts.pycro.maventestplace.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import usts.pycro.maventestplace.entity.SysUser;
 import usts.pycro.maventestplace.mapper.SysUserMapper;

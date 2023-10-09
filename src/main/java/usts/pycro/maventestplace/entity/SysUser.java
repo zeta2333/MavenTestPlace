@@ -1,9 +1,9 @@
 package usts.pycro.maventestplace.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.mybatisflex.annotation.Column;
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
+import com.mybatisflex.annotation.Table;
 import lombok.Data;
 
 /**
@@ -12,12 +12,12 @@ import lombok.Data;
  * 2023-10-07 15:46
  */
 @Data
-@TableName("sys_user")
+@Table("sys_user")
 public class SysUser {
-    @TableId(type = IdType.AUTO)
+    @Id(keyType = KeyType.Auto)
     private Long id;
-    @TableField("name")
+    @Column("name")
     private String name;
-    @TableField("age")
+    @Column("age")
     private Integer age;
 }

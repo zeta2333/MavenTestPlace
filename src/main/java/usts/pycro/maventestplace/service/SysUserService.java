@@ -1,6 +1,6 @@
 package usts.pycro.maventestplace.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.mybatisflex.core.service.IService;
 import usts.pycro.maventestplace.entity.SysUser;
 
 /**

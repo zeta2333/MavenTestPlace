@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace对应接口全类名 -->
+<mapper namespace="usts.pycro.maventestplace.mapper.AccountMapper">
+    <insert id="insertOne" parameterType="usts.pycro.maventestplace.entity.Account">
+        insert into `account`(`account_name`, `age`, `email`, `password`) value
+            (#{account.accountName}, #{account.age}, #{account.email}, #{account.password})
+    </insert>
+    <select id="count" resultType="int">
+        select count(*)
+        from account_${copy}
+        where 1 = 1
+           or id = ${id};
+    </select>
+</mapper>
