@@ -14,17 +14,19 @@ import lombok.Data;
 @Data
 @Table("account")
 public class Account {
-
-
     @Id
     private Long id;
+
     @Column("account_name")
     private String accountName;
+
     @Column("age")
     private Integer age;
+
     @Column("password")
     @ColumnMask("pycro_sensitive_rule")
     private String password;
+
     @Column("email")
     private String email;
 }

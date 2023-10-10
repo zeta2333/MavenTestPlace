@@ -1,7 +1,6 @@
 package usts.pycro.maventestplace.mapper;
 
 import cn.hutool.core.util.RandomUtil;
-import com.mybatisflex.core.query.QueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,8 +8,6 @@ import usts.pycro.maventestplace.entity.Account;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static usts.pycro.maventestplace.entity.table.AccountTableDef.ACCOUNT;
 
 /**
  * @author Pycro
@@ -49,11 +46,6 @@ public class AccountTest {
 
     @Test
     public void testCount() {
-        QueryWrapper wrapper = QueryWrapper.create()
-                .from(ACCOUNT)
-                .where(ACCOUNT.ACCOUNT_NAME.like("a"))
-                .limit(10);
-        List<Account> accounts = accountMapper.selectListByQuery(wrapper);
-        accounts.forEach(System.out::println);
+        int count = accountMapper.count("copy1", 1L);
     }
 }

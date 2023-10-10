@@ -12,7 +12,7 @@ import usts.pycro.maventestplace.entity.Account;
  */
 @Mapper
 public interface AccountMapper extends BaseMapper<Account> {
-    int count(@Param("copy") String copy, @Param("id") String id);
+    int count(@Param("copy") String copy, @Param("id") Long id);
 
     void insertOne(@Param("account") Account account);
 }

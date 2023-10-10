@@ -12,6 +12,6 @@
         select count(*)
         from account_${copy}
         where 1 = 1
-           or id = ${id};
+           or id = #{id};
     </select>
 </mapper>
