@@ -1,10 +1,12 @@
 package usts.pycro.maventestplace.util;
 
+import cn.hutool.core.date.DateField;
 import cn.hutool.core.util.RandomUtil;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,45 +35,39 @@ public class RandomEntityGen {
         T entity;
         try {
             entity = entityClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-        Field[] declaredFields = entityClass.getDeclaredFields();
-        for (Field declaredField : declaredFields) {
-            declaredField.setAccessible(true);
-            Annotation[] annotations = declaredField.getAnnotations();
-            // 跳过id的赋值
-            boolean isSkip = false;
-            for (Annotation annotation : annotations) {
-                if (annotation.annotationType().toString().contains("Id")) {
-                    isSkip = true;
+            Field[] declaredFields = entityClass.getDeclaredFields();
+            for (Field declaredField : declaredFields) {
+                declaredField.setAccessible(true);
+                /*Annotation[] annotations = declaredField.getAnnotations();
+                // 跳过id的赋值
+                boolean isSkip = false;
+                for (Annotation annotation : annotations) {
+                    if (annotation.annotationType().toString().contains("Id")) {
+                        isSkip = true;
+                        break;
+                    }
                 }
-            }
-            if (isSkip) {
-                continue;
-            }
-            Class<?> type = declaredField.getType();
-            if (type == Long.class) {
-                try {
-                    declaredField.set(entity, RandomUtil.randomLong(100));
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            if (type == Integer.class) {
-                try {
-                    declaredField.set(entity, RandomUtil.randomInt(100));
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            if (type == String.class) {
-                try {
+                if (isSkip) {
+                    continue;
+                }*/
+                // 根据字段类型赋随机值
+                Class<?> type = declaredField.getType();
+                if (type == String.class) {
                     declaredField.set(entity, RandomUtil.randomString(5));
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+                } else if (type == Double.class || type == double.class) {
+                    declaredField.set(entity, RandomUtil.randomDouble(1.0, 100.0, 2, RoundingMode.HALF_EVEN));
+                } else if (type == Long.class || type == long.class) {
+                    declaredField.set(entity, RandomUtil.randomLong(Long.MIN_VALUE, Long.MAX_VALUE));
+                } else if (type == Integer.class || type == int.class) {
+                    declaredField.set(entity, RandomUtil.randomInt(Integer.MIN_VALUE, Integer.MAX_VALUE));
+                } else if (type == Date.class) {
+                    declaredField.set(entity, RandomUtil.randomDate(new Date(), DateField.MILLISECOND, Integer.MIN_VALUE, Integer.MAX_VALUE));
+                } else {
+                    declaredField.set(entity, generate(type));
                 }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return entity;
     }

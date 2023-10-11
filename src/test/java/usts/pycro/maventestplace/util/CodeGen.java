@@ -3,7 +3,6 @@ package usts.pycro.maventestplace.util;
 import com.mybatisflex.codegen.Generator;
 import com.mybatisflex.codegen.config.GlobalConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import usts.pycro.maventestplace.entity.BaseEntity;
 
 import javax.sql.DataSource;
 
@@ -68,13 +67,12 @@ public class CodeGen {
 
         // 设置表前缀和只生成哪些表，setGenerateTable 未配置时，生成所有表
         globalConfig.getStrategyConfig()
-                .setGenerateTable("account_copy1", "account_copy2");
+                .setGenerateTable("article");
 
 
         // 设置生成 entity 并启用 Lombok
         globalConfig.enableEntity()
-                .setWithLombok(true)
-                .setSuperClass(BaseEntity.class);
+                .setWithLombok(true);
 
         // 设置生成 mapper
         globalConfig.enableMapper()

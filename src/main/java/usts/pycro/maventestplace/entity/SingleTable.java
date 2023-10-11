@@ -28,5 +28,5 @@ public class SingleTable {
 
     private String keyPart3;
 
-    private String commonFiled;
+    private String commonField;
 }

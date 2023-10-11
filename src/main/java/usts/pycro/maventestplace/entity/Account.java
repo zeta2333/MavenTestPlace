@@ -1,10 +1,10 @@
 package usts.pycro.maventestplace.entity;
 
-import com.mybatisflex.annotation.Column;
-import com.mybatisflex.annotation.ColumnMask;
-import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.Table;
+import com.mybatisflex.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Pycro
@@ -13,8 +13,11 @@ import lombok.Data;
  */
 @Data
 @Table("account")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Account {
-    @Id
+    @Id(keyType = KeyType.Auto)
     private Long id;
 
     @Column("account_name")
@@ -24,7 +27,6 @@ public class Account {
     private Integer age;
 
     @Column("password")
-    @ColumnMask("pycro_sensitive_rule")
     private String password;
 
     @Column("email")

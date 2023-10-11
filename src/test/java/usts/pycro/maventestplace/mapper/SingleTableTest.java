@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import usts.pycro.maventestplace.entity.SingleTable;
 import usts.pycro.maventestplace.service.SingleTableService;
+import usts.pycro.maventestplace.util.RandomEntityGen;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Pycro
@@ -18,6 +20,8 @@ import java.util.List;
 public class SingleTableTest {
     @Autowired
     private SingleTableService service;
+    @Autowired
+    private SingleTableMapper mapper;
 
     @Test
     public void testInsert() {
@@ -32,9 +36,15 @@ public class SingleTableTest {
         //     singleTable.setCommonFiled("常规字段" + (i + 1));
         //     service.save(singleTable);
         // }
-        SingleTable singleTable = new SingleTable();
-        singleTable.setKey1("1");
-        service.save(singleTable);
+
+        List<SingleTable> singleTables = RandomEntityGen.generate(SingleTable.class, 10000)
+                .stream()
+                .peek(singleTable -> {
+                    singleTable.setId(null);
+                    // singleTable.setKey2(null);
+                })
+                .collect(Collectors.toList());
+        mapper.insertBatch(singleTables);
     }
 
     @Test

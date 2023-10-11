@@ -15,7 +15,7 @@
     <description>MavenTestPlace</description>
     <properties>
         <java.version>1.8</java.version>
-        <mybatis-flex.version>1.6.8</mybatis-flex.version>
+        <mybatis-flex.version>1.7.0</mybatis-flex.version>
     </properties>
 
     <dependencyManagement>
@@ -68,6 +68,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
         </dependency>
 
         <!-- mybatis-plus -->
@@ -108,16 +109,18 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>1.18.28</version>
                         </path>
                         <path>
                             <groupId>com.mybatis-flex</groupId>
                             <artifactId>mybatis-flex-processor</artifactId>
+                            <version>${mybatis-flex.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

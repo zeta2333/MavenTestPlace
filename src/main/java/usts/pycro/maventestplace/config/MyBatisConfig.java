@@ -14,6 +14,6 @@ import org.springframework.context.annotation.Configuration;
 public class MyBatisConfig {
 
     static {
-        MaskManager.registerMaskProcessor("pycro_sensitive_rule", data -> "(*”^▽^“*)");
+        MaskManager.registerMaskProcessor("pycro_sensitive_rule", data -> "(*^▽^*)");
     }
 }
