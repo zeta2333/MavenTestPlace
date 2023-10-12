@@ -1,6 +1,7 @@
 package usts.pycro.maventestplace.mapper;
 
 import cn.hutool.core.util.RandomUtil;
+import com.mybatisflex.core.query.QueryChain;
 import com.mybatisflex.core.query.QueryCondition;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.core.update.UpdateChain;
@@ -11,11 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import usts.pycro.maventestplace.entity.Account;
 import usts.pycro.maventestplace.service.AccountService;
 import usts.pycro.maventestplace.util.RandomEntityGen;
+import usts.pycro.maventestplace.vo.AccountVo;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static usts.pycro.maventestplace.entity.table.AccountTableDef.ACCOUNT;
+import static usts.pycro.maventestplace.entity.table.ArticleTableDef.ARTICLE;
 
 /**
  * @author Pycro
@@ -72,10 +75,19 @@ public class AccountTest {
                         .limit(10));
         mapper.update(account);*/
         UpdateChain.of(Account.class)
-                .set(ACCOUNT.AGE,null)
-                .setRaw(ACCOUNT.AGE,ACCOUNT.AGE.add(1))
+                .set(ACCOUNT.AGE, null)
+                .setRaw(ACCOUNT.AGE, ACCOUNT.AGE.add(1))
                 .where(ACCOUNT.ID.eq(200))
                 .update();
+    }
 
+    @Test
+    public void testSelectAccountVo() {
+        List<AccountVo> accountVos = QueryChain.of(mapper)
+                .select(ACCOUNT.DEFAULT_COLUMNS,ARTICLE.DEFAULT_COLUMNS)
+                .from(ACCOUNT).leftJoin(ARTICLE).on(ARTICLE.ACCOUNT_ID.eq(ACCOUNT.ID))
+                .where(ACCOUNT.ID.gt(198))
+                .listAs(AccountVo.class);
+        System.out.println(accountVos.get(0));
     }
 }

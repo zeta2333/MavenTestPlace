@@ -1,8 +1,7 @@
 package usts.pycro.maventestplace.mapper;
 
 import cn.hutool.core.util.RandomUtil;
-import com.mybatisflex.core.paginate.Page;
-import com.mybatisflex.core.query.QueryWrapper;
+import com.mybatisflex.core.query.QueryChain;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,16 +42,30 @@ public class ArticleTest {
 
     @Test
     public void testSelectDTO() {
-        QueryWrapper wrapper = QueryWrapper.create()
-                .select(ARTICLE.DEFAULT_COLUMNS)
-                .select(ACCOUNT.ACCOUNT_NAME, ACCOUNT.AGE, ACCOUNT.EMAIL, ACCOUNT.PASSWORD.as(ArticleDTO::getPasswd))
+        /*QueryWrapper wrapper = QueryWrapper.create()
+                .select(
+                        ARTICLE.ID,
+                        max(ACCOUNT.AGE).as(ArticleDTO::getMaxAge),
+                        min(ACCOUNT.AGE).as(ArticleDTO::getMinAge)
+                )
+                .select(
+                        ACCOUNT.ID
+                        // ACCOUNT.ACCOUNT_NAME, ACCOUNT.AGE, ACCOUNT.EMAIL, ACCOUNT.PASSWORD.as(ArticleDTO::getPasswd),
+                )
+                .from(ACCOUNT)
+                .leftJoin(ARTICLE).on(ARTICLE.ACCOUNT_ID.eq(ACCOUNT.ID))
+                .where(ACCOUNT.ID.gt(198))
+                .groupBy(Account::getId);
+        List<ArticleDTO> results = mapper.selectListByQueryAs(wrapper, ArticleDTO.class);
+        results.forEach(System.out::println);*/
+        // Page<ArticleDTO> articleDTOPage = mapper.paginateAs(new Page<>(1, 10), wrapper, ArticleDTO.class);
+        // System.out.println(articleDTOPage.getRecords().get(0));
+        List<ArticleDTO> dtos = QueryChain.of(mapper)
+                .select(ARTICLE.DEFAULT_COLUMNS, ACCOUNT.DEFAULT_COLUMNS)
                 .from(ARTICLE)
                 .leftJoin(ACCOUNT).on(ARTICLE.ACCOUNT_ID.eq(ACCOUNT.ID))
-                .where(ACCOUNT.ID.gt(198));
-        List<ArticleDTO> results = mapper.selectListByQueryAs(wrapper, ArticleDTO.class);
-        // results.forEach(System.out::println);
-        Page<ArticleDTO> resultPage = new Page<>();
-        Page<ArticleDTO> articleDTOPage = mapper.paginateAs(resultPage, wrapper, ArticleDTO.class);
-        System.out.println(articleDTOPage.getRecords().size());
+                .where(ACCOUNT.ID.gt(198))
+                .listAs(ArticleDTO.class);
+        System.out.println(dtos.get(0));
     }
 }

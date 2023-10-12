@@ -1,7 +1,7 @@
 package usts.pycro.maventestplace.dto;
 
-import com.mybatisflex.annotation.ColumnMask;
 import lombok.Data;
+import usts.pycro.maventestplace.entity.Account;
 
 /**
  * @author Pycro
@@ -19,12 +19,13 @@ public class ArticleDTO {
     private String content;
 
     // 用户相关字段
-    private String accountName;
-
-    private Integer age;
-
-    private String email;
-
-    @ColumnMask("pycro_sensitive_rule")
-    private String passwd;
+    private Account account;
+    // private String accountName;
+    //
+    // private Integer age;
+    //
+    // private String email;
+    //
+    // @ColumnMask("pycro_sensitive_rule")
+    // private String passwd;
 }

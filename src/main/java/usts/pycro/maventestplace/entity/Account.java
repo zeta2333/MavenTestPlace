@@ -27,6 +27,7 @@ public class Account {
     private Integer age;
 
     @Column("password")
+    @ColumnMask("pycro_sensitive_rule")
     private String password;
 
     @Column("email")
