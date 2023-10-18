@@ -1,5 +1,7 @@
 package usts.pycro.maventestplace;
 
+import cn.hutool.crypto.digest.DigestUtil;
+
 /**
  * @author Pycro
  * @version 1.0
@@ -7,9 +9,9 @@ package usts.pycro.maventestplace;
  */
 public class MathTest {
     public static void main(String[] args) {
-        Object a = 1;
-        System.out.println(a.getClass());
+        String s = DigestUtil.sha256Hex("123456");
     }
+
 
 
 }
