@@ -1,6 +1,7 @@
 package usts.pycro.maventestplace.mapper;
 
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.query.QueryChain;
 import com.mybatisflex.core.query.QueryCondition;
 import com.mybatisflex.core.query.QueryWrapper;
@@ -14,9 +15,11 @@ import usts.pycro.maventestplace.service.AccountService;
 import usts.pycro.maventestplace.util.RandomEntityGen;
 import usts.pycro.maventestplace.vo.AccountVo;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static manifold.science.util.CoercionConstants.bd;
 import static usts.pycro.maventestplace.entity.table.AccountTableDef.ACCOUNT;
 import static usts.pycro.maventestplace.entity.table.ArticleTableDef.ARTICLE;
 
@@ -56,8 +59,17 @@ public class AccountTest {
 
     @Test
     public void testSelect() {
-        List<Account> accounts = mapper.selectListByQuery(new QueryWrapper().limit(10));
-        System.out.println(accounts.size());
+        List<String> emails = mapper.selectListByQueryAs(new QueryWrapper()
+                .select(ACCOUNT.EMAIL)
+                .groupBy(ACCOUNT.EMAIL)
+                // .where(ACCOUNT.EMAIL.in("\"\""))
+                .limit(10), String.class);
+        StrUtil strUtil;
+        emails.forEach(e -> {
+            System.out.println("isBlank? ${StrUtil.isBlank(e)}");
+            System.out.println("isEmpty? ${StrUtil.isEmpty(e)}");
+        });
+        System.out.println("size is ${emails.size()}");
     }
 
     @Test
@@ -67,6 +79,7 @@ public class AccountTest {
 
     @Test
     public void testUpdate() {
+        BigDecimal a = 0.0bd + 0.0bd;
        /* Account account = UpdateEntity.of(Account.class, 233);
         account.setAccountName(null);
         UpdateWrapper.of(account).set(ACCOUNT_COPY1.AGE,
@@ -84,7 +97,7 @@ public class AccountTest {
     @Test
     public void testSelectAccountVo() {
         List<AccountVo> accountVos = QueryChain.of(mapper)
-                .select(ACCOUNT.DEFAULT_COLUMNS,ARTICLE.DEFAULT_COLUMNS)
+                .select(ACCOUNT.DEFAULT_COLUMNS, ARTICLE.DEFAULT_COLUMNS)
                 .from(ACCOUNT).leftJoin(ARTICLE).on(ARTICLE.ACCOUNT_ID.eq(ACCOUNT.ID))
                 .where(ACCOUNT.ID.gt(198))
                 .listAs(AccountVo.class);

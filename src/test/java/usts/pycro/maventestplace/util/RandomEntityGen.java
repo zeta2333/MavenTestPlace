@@ -17,7 +17,7 @@ import java.util.List;
 public class RandomEntityGen {
 
     public static void main(String[] args) throws Exception {
-        // usts.pycro.maventestplace.entity.T accountCopy1 = generate();
+        // usts.pycro.test.entity.T accountCopy1 = generate();
         // System.out.println(accountCopy1);
     }
 
